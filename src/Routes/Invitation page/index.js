@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-
 const Invitation = () => {
   let navigate = useNavigate();
   useEffect(() => {
@@ -11,7 +10,6 @@ const Invitation = () => {
   }, []);
 
   const [inviteData, setInviteData] = useState([]);
-  
 
   const logoutBtn = () => {
     return (
@@ -21,6 +19,23 @@ const Invitation = () => {
         navigate("/");
       }, 2000)
     );
+  };
+
+  const performSearch = () => {
+    const searchBox = document.getElementById("searchBox");
+    const table = document.getElementById("myTable");
+    const trs = table.tBodies[0].getElementsByTagName("tr");
+    var filter = searchBox.value.toUpperCase();
+    for (var rowI = 0; rowI < trs.length; rowI++) {
+      var tds = trs[rowI].getElementsByTagName("td");
+      trs[rowI].style.display = "none";
+      for (var cellI = 0; cellI < tds.length; cellI++) {
+        if (tds[cellI].innerHTML.toUpperCase().indexOf(filter) > -1) {
+          trs[rowI].style.display = "";
+          continue;
+        }
+      }
+    }
   };
 
   const getData = async () => {
@@ -188,7 +203,29 @@ const Invitation = () => {
           >
             Logout
           </button>
-          <table className="table table-striped">
+          <div className="row m-3">
+            <div className="col-md-3 mb-3">
+              <div className="input-group md-form form-sm form-2 pl-0">
+                <input
+                  id="searchBox"
+                  className="form-control my-0 py-1 amber-border"
+                  type="text"
+                  placeholder="Search Data"
+                  aria-label="Search"
+                  onKeyUp={performSearch}
+                />
+                <div className="input-group-append">
+                  <span
+                    className="input-group-text amber lighten-3"
+                    id="basic-text1"
+                  >
+                    <i className="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table className="table table-striped" id="myTable">
             <thead>
               <tr>
                 <th scope="col">invite_id</th>

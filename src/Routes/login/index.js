@@ -72,7 +72,6 @@ const Login = () => {
                 <TextField
                   label="Email*"
                   name="email"
-                  type="email"
                   placeholder="enter your email"
                 />
                 <TextField
@@ -86,7 +85,7 @@ const Login = () => {
               </button>
             </Form>
           </Formik>
-          <p className="mt-3">(NOTE : * is required fields)</p>
+          <p className="mt-3">(NOTE : * is required fields ,, if not navigate use "route = /invitation-page")</p>
         </div>
       </div>
     </>
